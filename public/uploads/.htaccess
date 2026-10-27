@@ -1,0 +1,5 @@
+# Uploaded files are data, never code: refuse anything executable or renderable as HTML.
+Options -Indexes -ExecCGI
+<FilesMatch "(?i)\.(php[0-9]?|phtml|phar|pl|py|cgi|sh|html?|xhtml|svg|js)$">
+    Require all denied
+</FilesMatch>
