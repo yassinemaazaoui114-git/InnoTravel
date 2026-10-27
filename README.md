@@ -4,6 +4,8 @@
 
 # InnoTravel
 
+   **PIDEV team project at Esprit School of Engineering (2025)** by Aziz Messaoud, Oumayma Saddouri, Eya Laourine, Ranim Ben Salem, Fares Ben Kacem and Yassine Maazaoui. Original repository: [oumaymasaddouri/InnoTravel-PiDev-Symfony](https://github.com/oumaymasaddouri/InnoTravel-PiDev-Symfony)
+   
 InnoTravel is a travel platform for Tunisia: travellers plan trips, discover events, book hotels,
 reserve vehicles and share stories, while administrators run everything from a back office.
 
@@ -14,22 +16,7 @@ It was built as a **team project for the PIDEV course (Projet Intégré de Déve
 > The original team repository is
 > [oumaymasaddouri/InnoTravel-PiDev-Symfony](https://github.com/oumaymasaddouri/InnoTravel-PiDev-Symfony).
 > This version fixes the security issues listed below, updates dependencies, removes committed
-> secrets and user uploads, and makes the project installable from scratch.
-
-## Screenshots
-
-| Front office | |
-|---|---|
-| ![Home](docs/screenshots/home.png) | ![Events](docs/screenshots/events.png) |
-| ![Hotels](docs/screenshots/hotels.png) | ![Transport](docs/screenshots/transport.png) |
-| ![Blog](docs/screenshots/blog.png) | |
-
-| Back office | |
-|---|---|
-| ![Admin dashboard](docs/screenshots/admin-dashboard.png) | ![Transport management](docs/screenshots/admin-transport.png) |
-| ![Events management](docs/screenshots/admin-events.png) | |
-
-<sub>Screenshots use local demo data.</sub>
+> secrets and user uploads, and makes the project installable from scratch. 
 
 ## Features
 
@@ -149,57 +136,6 @@ Every key goes in `.env.local`. Without one, the app still runs and the feature 
 | `HUGGINGFACE_API_KEY` | AI event descriptions | A built-in template description is used |
 | `CURRENCY_API_KEY` | Live exchange rates | Built-in fallback rates are used |
 | `MAILER_DSN` | All emails (reset codes, notifications, tickets) | With `null://null`, emails are discarded |
-
-## Team & credits
-
-InnoTravel was designed and built by six students. Each member developed their modules on their
-own branch, and the modules were then integrated into `main`.
-
-| Member | Modules |
-|---|---|
-| **Aziz Messaoud** | Hotels (catalogue, filters, slugs, currency conversion), bookings with Stripe Checkout and PDF invoices, feedback, user management (EasyAdmin, traveller statistics), and the final integration of all modules |
-| **Oumayma Saddouri** | Initial project setup, trips & itineraries (traveller trip planner and admin management), Gemini travel chatbot, email notifications |
-| **Eya Laourine** | Blog: posts, comments, reactions and admin moderation |
-| **Ranim Ben Salem** | Events and organizers |
-| **Fares Ben Kacem** | Team member |
-| **Yassine Maazaoui** | Transport and reservations: vehicle catalogue, front-office and admin CRUDs for vehicles and reservations, reservation PDF tickets, QR code service, back-office layout. Maintainer of this enhanced version |
-
-Features that first appear in the integrated `main` branch, such as event participations,
-ticket verification and feedback analytics, have no separate branch history.
-
-## Security improvements in this version
-
-- **No secrets in the repository.** Hardcoded API keys, SMTP credentials and app secrets were moved to
-  environment variables (`.env.local`, git-ignored) with placeholders in `.env.example`.
-- **Admin authentication goes through Symfony Security.** Admins are regular users with `ROLE_ADMIN`
-  and a hashed password. The plaintext admin password check, its hardcoded fallback and the
-  session-flag "admin" voter were removed.
-- **Back office locked down.** An `access_control` rule now requires `ROLE_ADMIN` for every `/admin`
-  route, and `#[IsGranted]` was added to controllers that had no check.
-- **Safe file uploads.** Profile pictures, blog, event and organizer images must be real JPEG, PNG,
-  WebP or GIF images under 2 MB. They are stored under random names whose extension comes from the
-  detected MIME type, never the client filename. `public/uploads/.htaccess` blocks script and HTML
-  files under Apache.
-- **CSRF protection on destructive actions.** Deleting users, accounts, trips, itineraries and
-  feedback now requires `POST` with a CSRF token, and user deletion also requires an admin.
-- **Password reset hardened.** Codes are stored hashed, expire after 10 minutes and allow 5 attempts,
-  and the form no longer reveals whether an email is registered.
-- **Dependencies updated.** Symfony 6.4.48, Twig 3.30, EasyAdmin 4.29, Dompdf 3.1.6 and Doctrine ORM 3.7: `composer audit`
-  went from 50 advisories (1 critical, 13 high) to 0. `npm audit` went from 25 to 6, all in
-  build-time tooling.
-- **Repository cleanup.** Removed committed user uploads, unused AdminLTE demo files and source
-  maps (the checkout went from 2,886 files / 140 MB to 880 files / 41 MB), and replaced 8
-  inconsistent migrations with one baseline migration.
-
-## Known limitations
-
-- Reservation module (fix in progress):
-  - opening `/reservation/new` when no vehicle is active creates a "Demo Car" in the database;
-  - the back-office reservation statistics page (`/admin/reservation/statistics`) returns an error;
-  - the back-office "new reservation" page (`/admin/reservation/new`) returns an error.
-- The event category filter (`/events/category/{id}`) returns an error.
-- Event participation QR codes use the retired Google Charts API, so the QR images don't render.
-- The project uses both AssetMapper and Webpack Encore configuration; templates use Encore.
 
 ## License
 
