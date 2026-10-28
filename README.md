@@ -9,12 +9,7 @@
 InnoTravel is a travel platform for Tunisia: travellers plan trips, discover events, book hotels,
 reserve vehicles and share stories, while administrators run everything from a back office.
 
-It was built as a **team project for the PIDEV course (Projet Intégré de Développement) at
-[Esprit School of Engineering](https://esprit.tn), 2025**, with Symfony 6.4.
-
-> **About this repository.** This is an enhanced, cleaned-up version maintained by Yassine Maazaoui.
-> The original team repository is
-> [oumaymasaddouri/InnoTravel-PiDev-Symfony](https://github.com/oumaymasaddouri/InnoTravel-PiDev-Symfony).
+> **About this repository.**
 > This version fixes several security issues, updates dependencies, removes committed
 > secrets and user uploads, and makes the project installable from scratch. 
 
