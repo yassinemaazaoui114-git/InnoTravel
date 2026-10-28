@@ -15,7 +15,7 @@ It was built as a **team project for the PIDEV course (Projet Intégré de Déve
 > **About this repository.** This is an enhanced, cleaned-up version maintained by Yassine Maazaoui.
 > The original team repository is
 > [oumaymasaddouri/InnoTravel-PiDev-Symfony](https://github.com/oumaymasaddouri/InnoTravel-PiDev-Symfony).
-> This version fixes the security issues listed below, updates dependencies, removes committed
+> This version fixes several security issues, updates dependencies, removes committed
 > secrets and user uploads, and makes the project installable from scratch. 
 
 ## Features
